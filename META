@@ -1,0 +1,5 @@
+description = "Messaging client for AMQP"
+version = "0"
+requires = "rpc"
+archive(byte) = "netamqp.cma"
+archive(native) = "netamqp.cmxa"

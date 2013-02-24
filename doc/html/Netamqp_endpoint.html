@@ -1,0 +1,535 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Netamqp_methods_0_9.html">
+<link rel="next" href="Netamqp_connection.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><link title="Creating and (dis)conecting" rel="Section" href="#2_Creatinganddisconecting">
+<link title="Using an activated endpoint" rel="Section" href="#2_Usinganactivatedendpoint">
+<link title="Sending and receiving messages" rel="Section" href="#2_Sendingandreceivingmessages">
+<link title="Error propagation" rel="Section" href="#2_Errorpropagation">
+<title>Netamqp - AMQP client : Netamqp_endpoint</title>
+</head>
+<body>
+<div class="navbar"><a href="Netamqp_methods_0_9.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Netamqp_connection.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Netamqp_endpoint.html">Netamqp_endpoint</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Netamqp_endpoint: <code class="code">sig</code> <a href="Netamqp_endpoint.html">..</a> <code class="code">end</code></pre>Endpoints are low-level containers for the protocol state
+<p>
+
+    They implement the send/receive queues, and the message dispatcher<br>
+<hr width="100%">
+<pre><span id="TYPEconnector"><span class="keyword">type</span> <code class="type"></code>connector</span> = <code class="type">[ `Implied | `Inet of string * int | `Sockaddr of Unix.sockaddr ]</code> </pre>
+<div class="info">
+How to connect to the server:<ul>
+<li><code class="code">`Sockaddr a</code>: the server port is given by socket address <code class="code">a</code></li>
+<li><code class="code">`Inet(host,port)</code>: the server is identified by this host/port pair</li>
+<li><code class="code">`Implied</code>: a reserved connector when the server address is implicitly
+        known only</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEtransport_layer"><span class="keyword">type</span> <code class="type"></code>transport_layer</span> = <code class="type">[ `Custom of<br>           unit -> <a href="Netamqp_transport.amqp_multiplex_controller-c.html">Netamqp_transport.amqp_multiplex_controller</a> Uq_engines.engine<br>       | `TCP of <a href="Netamqp_endpoint.html#TYPEconnector">connector</a> ]</code> </pre>
+<div class="info">
+Which transport layer to choose:<ul>
+<li><code class="code">`TCP connector</code>: Use TCP</li>
+<li><code class="code">`Custom f</code>: Call <code class="code">f ()</code> to get a new transport stream</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEendpoint"><span class="keyword">type</span> <code class="type"></code>endpoint</span> </pre>
+<div class="info">
+The abstract endpoint container<br>
+</div>
+
+<pre><span id="TYPEstate"><span class="keyword">type</span> <code class="type"></code>state</span> = <code class="type">[ `Connected of bool<br>       | `Disconnected<br>       | `Disconnecting of bool<br>       | `Error of exn<br>       | `Off ]</code> </pre>
+<div class="info">
+States:<ul>
+<li><code class="code">`Off</code>: Endpoint is still down (initial state)</li>
+<li><code class="code">`Connected flag</code>: The endpoint accepts requests. If <code class="code">flag</code>,
+        the TCP connection is established. Note that the endpoint
+        already allows to add requests before the TCP connection is
+        fully established.</li>
+<li><code class="code">`Disconnecting flag</code>: A disconnect is requested when all async
+        methods are sent and all sync methods are responded, i.e. when
+        all locally requested operations are done. If <code class="code">flag</code>, the
+        TCP connection is established. The case <code class="code">flag=false</code> can only
+        happen if a not-yet fully connected endpoint is disconnected.</li>
+<li><code class="code">`Disconnected</code>: Endpoint is down after regular disconnect</li>
+<li><code class="code">`Error</code>: A low-level error occurred, and the endpoint is down</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEproto_revision_0_9"><span class="keyword">type</span> <code class="type"></code>proto_revision_0_9</span> = <code class="type">[ `One ]</code> </pre>
+
+<pre><span id="TYPEprotocol"><span class="keyword">type</span> <code class="type"></code>protocol</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_endpoint.html#TYPEproto_revision_0_9">proto_revision_0_9</a> ]</code> </pre>
+<div class="info">
+The protocol variant. Patch releases are not counted here:<ul>
+<li><code class="code">`AMQP_0_9</code>: This actually chooses AMQP-0-9-1 with as much
+        compatibility as possible for existing servers. 0-9-1 is
+        the subset of 0-9 that is widely implemented.</li>
+</ul>
+<br>
+</div>
+
+<br>
+Methods are control messages exchanged between client and server.
+    They exist in two major styles:
+<p>
+<ul>
+<li><b>Synchronous</b> methods are part of request/response pairs</li>
+<li><b>Asynchronous</b> methods are one-way messages</li>
+</ul>
+
+    There is a bit confusion in terminology because the sync/async
+    distinction is also used for the way socket events are handled.
+    This is not meant in this context!
+<p>
+
+    Both styles of message exchange can be started by either peer,
+    client or server.
+<p>
+
+    In a request/response pair, <b>each</b> of the two control messages
+    is called a method.
+<p>
+
+    A method usually has arguments. The method type is the method
+    without arguments.
+<p>
+
+    The methods are described in more detail in an XML file (e.g.
+    amqp0-9-1.xml). There is also a version-specific Ocaml module that
+    is generated: <code class="code">Netamqp_method_0_9</code>. See there how the methods
+    are formalized (e.g. which types the arguments have).<br>
+<pre><span id="TYPEsync_client_to_server_method_t"><span class="keyword">type</span> <code class="type"></code>sync_client_to_server_method_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEsync_client_to_server_method_t">Netamqp_methods_0_9.sync_client_to_server_method_t</a> ]</code> </pre>
+<div class="info">
+The subset of methods:<ul>
+<li>Synchronous methods the client can send to the server. This
+        includes both initial requests from the client and responses
+        to the server when the server initiates the request/response pair.</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEsync_server_to_client_method_t"><span class="keyword">type</span> <code class="type"></code>sync_server_to_client_method_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEsync_server_to_client_method_t">Netamqp_methods_0_9.sync_server_to_client_method_t</a> ]</code> </pre>
+<div class="info">
+The subset of methods:<ul>
+<li>Synchronous methods the server can send to the client. This
+        includes both initial requests from the server and responses
+        to the client when the client initiates the request/response pair.</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEsync_client_initiated_method_t"><span class="keyword">type</span> <code class="type"></code>sync_client_initiated_method_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEsync_client_initiated_method_t">Netamqp_methods_0_9.sync_client_initiated_method_t</a> ]</code> </pre>
+<div class="info">
+The subset of methods:<ul>
+<li>Synchronous methods where the client sends the first message</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEsync_server_initiated_method_t"><span class="keyword">type</span> <code class="type"></code>sync_server_initiated_method_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEsync_server_initiated_method_t">Netamqp_methods_0_9.sync_server_initiated_method_t</a> ]</code> </pre>
+<div class="info">
+The subset of methods:<ul>
+<li>Synchronous methods where the server sends the first message</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEsync_server_initiated_method_type_t"><span class="keyword">type</span> <code class="type"></code>sync_server_initiated_method_type_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEsync_server_initiated_method_type_t">Netamqp_methods_0_9.sync_server_initiated_method_type_t</a> ]</code> </pre>
+<div class="info">
+The subset of method types:<ul>
+<li>Synchronous method types where the server sends the first message</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEasync_client_to_server_method_t"><span class="keyword">type</span> <code class="type"></code>async_client_to_server_method_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEasync_client_to_server_method_t">Netamqp_methods_0_9.async_client_to_server_method_t</a> ]</code> </pre>
+<div class="info">
+The subset of methods:<ul>
+<li>Asynchronous methods the client can send to the server</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEasync_server_to_client_method_t"><span class="keyword">type</span> <code class="type"></code>async_server_to_client_method_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEasync_server_to_client_method_t">Netamqp_methods_0_9.async_server_to_client_method_t</a> ]</code> </pre>
+<div class="info">
+The subset of methods:<ul>
+<li>Asynchronous methods the server can send to the server</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEasync_server_to_client_method_type_t"><span class="keyword">type</span> <code class="type"></code>async_server_to_client_method_type_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEasync_server_to_client_method_type_t">Netamqp_methods_0_9.async_server_to_client_method_type_t</a> ]</code> </pre>
+<div class="info">
+The subset of method types:<ul>
+<li>Asynchronous method types the server can send to the server</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEmethod_type_t"><span class="keyword">type</span> <code class="type"></code>method_type_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEmethod_type_t">Netamqp_methods_0_9.method_type_t</a> ]</code> </pre>
+<div class="info">
+All method types<br>
+</div>
+
+<br>
+Some methods can also carry content data, i.e. the real data that
+    goes to or comes from the message queue. Content data is primarily
+    a long string, but there is also a header with properties.<br>
+<pre><span id="TYPEprops_t"><span class="keyword">type</span> <code class="type"></code>props_t</span> = <code class="type">[ `AMQP_0_9 of <a href="Netamqp_methods_0_9.html#TYPEprops_t">Netamqp_methods_0_9.props_t</a> ]</code> </pre>
+<div class="info">
+Possible properties. Note that the property class must match the
+      class that is used for content exchange. Right now this means
+      only <code class="code">`P_basic</code> is actually available.<br>
+</div>
+
+<pre><span id="TYPEdata"><span class="keyword">type</span> <code class="type"></code>data</span> = <code class="type"><a href="Netamqp_endpoint.html#TYPEprops_t">props_t</a> * Xdr_mstring.mstring list</code> </pre>
+<div class="info">
+Content data as pair of properties and a string. The string is
+      represented as list of <code class="code">mstring</code>, an abstraction over several
+      possible representations of byte arrays provided by Ocamlnet
+      (see the <code class="code">rpc</code> library for <code class="code">Xdr_mstring</code>).
+<p>
+
+      Data received from the server is often returned as a true list
+      with more than one element. Each element represents a frame on
+      the transport level.
+<p>
+
+      There is no need to split strings into frames before passing
+      the strings to the endpoint for sending them to the server. This
+      is done automatically if needed.<br>
+</div>
+
+<br>
+<span id="2_Creatinganddisconecting"><h2>Creating and (dis)conecting</h2></span><br>
+<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEtransport_layer">transport_layer</a> -><br>       <a href="Netamqp_endpoint.html#TYPEprotocol">protocol</a> -><br>       Unixqueue.event_system -> <a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a></code></pre><div class="info">
+Creates a new endpoint which is initially <code class="code">`Off</code>.<br>
+</div>
+<pre><span id="VALconfigure_timeout"><span class="keyword">val</span> configure_timeout</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> float -> unit</code></pre><div class="info">
+Configures the transport-level timeout. This only affects:<ul>
+<li>Connecting to the server</li>
+<li>Sending messages</li>
+<li>Receiving messages while a frame is being read (but not between frames)</li>
+</ul>
+
+      Defaults to 300 seconds if not configured.<br>
+</div>
+<pre><span id="VALget_timeout"><span class="keyword">val</span> get_timeout</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> float</code></pre><div class="info">
+Return the configured timeout value<br>
+</div>
+<pre><span id="VALdefault_port"><span class="keyword">val</span> default_port</span> : <code class="type">int</code></pre><div class="info">
+Default port number for AMQP<br>
+</div>
+<pre><span id="VALconnect"><span class="keyword">val</span> connect</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> unit</code></pre><div class="info">
+Triggers the connect to the server. The new state is <code class="code">`Connected false</code>.
+      If the endpoint is already connected, nothing changes.
+<p>
+
+      After calling <code class="code">connect</code> the underlying transport is still inactive,
+      but the connection procedure is triggered. It is nevertheless immediately
+      possible to add requests to the endpoint. These will be carried out
+      once the connection on the transport level is established.<br>
+</div>
+<pre><span id="VALdisconnect"><span class="keyword">val</span> disconnect</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> unit</code></pre><div class="info">
+Requests an orderly disconnect. The disconnect is only triggered
+      but first done when<ul>
+<li>All async methods are sent to the server</li>
+<li>All locally invoked sync methods are responded</li>
+<li>The event loop runs the next time.</li>
+</ul>
+
+      The new state is <code class="code">`Disconnecting</code>.<br>
+</div>
+<pre><span id="VALquick_disconnect"><span class="keyword">val</span> quick_disconnect</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> unit</code></pre><div class="info">
+A quick disconnect proceeds faster than an orderly disconnect.
+      In particular, it is not waited until the locally invoked
+      sync methods are responded.<br>
+</div>
+<pre><span id="VALreset"><span class="keyword">val</span> reset</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> unit</code></pre><div class="info">
+Turns the endpoint off again. Operations, if any, are immediately
+      aborted.<br>
+</div>
+<pre><span id="VALstate"><span class="keyword">val</span> state</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_endpoint.html#TYPEstate">state</a></code></pre><div class="info">
+Reports the connection state<br>
+</div>
+<pre><span id="VALstate_change_e"><span class="keyword">val</span> state_change_e</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_endpoint.html#TYPEstate">state</a> Uq_engines.engine</code></pre><div class="info">
+The engine finishes at the next <code class="code">state</code> change. 
+<p>
+
+      It is possible to immediately create another <code class="code">state_change_e</code> when
+      the previous engine finishes. This allows it to continuously watch 
+      for state changes.<br>
+</div>
+<pre><span id="VALevent_system"><span class="keyword">val</span> event_system</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> Unixqueue.event_system</code></pre><div class="info">
+Return the event system the endpoint uses<br>
+</div>
+<pre><span id="VALprotocol"><span class="keyword">val</span> protocol</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_endpoint.html#TYPEprotocol">protocol</a></code></pre><div class="info">
+Return the protocol<br>
+</div>
+<br>
+<span id="2_Usinganactivatedendpoint"><h2>Using an activated endpoint</h2></span><br>
+<br>
+The following methods must only be called when the state is
+    <code class="code">`Connected</code>, i.e. after calling <code class="code">connect</code>.<br>
+<pre><span id="VALgetsockname"><span class="keyword">val</span> getsockname</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_transport.html#TYPEsockaddr">Netamqp_transport.sockaddr</a></code></pre><pre><span id="VALgetpeername"><span class="keyword">val</span> getpeername</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_transport.html#TYPEsockaddr">Netamqp_transport.sockaddr</a></code></pre><div class="info">
+Get the names of the own socket and the peer socket, resp. 
+      These functions fail if the endpoint socket is not connected
+      at the moment of checking.<br>
+</div>
+<pre><span id="VALenable_channel"><span class="keyword">val</span> enable_channel</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -> unit</code></pre><pre><span id="VALdisable_channel"><span class="keyword">val</span> disable_channel</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -> unit</code></pre><div class="info">
+Enable/disable channels. Only an enabled channel can be used for
+      communication.
+<p>
+
+      Channel 0 is always enabled.
+<p>
+
+      Disabling a channel immediately drops all unsent messages except
+      those on the priority queue. Also, 
+      pending synchronous calls will get the exception
+      <a href="Netamqp_types.html#EXCEPTIONMethod_dropped"><code class="code">Netamqp_types.Method_dropped</code></a>. All registrations
+      for the channel are deleted.<br>
+</div>
+<pre><span id="VALis_channel_enabled"><span class="keyword">val</span> is_channel_enabled</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -> bool</code></pre><div class="info">
+Whether a channel is enabled<br>
+</div>
+<pre><span id="VALsuggest_channel"><span class="keyword">val</span> suggest_channel</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a></code></pre><div class="info">
+Suggests a channel number<br>
+</div>
+<pre><span id="VALflow_control"><span class="keyword">val</span> flow_control</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -> bool -> unit</code></pre><div class="info">
+Requests that the flow is enabled (true) or disabled (false) for
+      a certain channel. By default, the channel flow is enabled.
+<p>
+
+      This only affects content messages sent to the server.<br>
+</div>
+<pre><span id="VALdrop_frames"><span class="keyword">val</span> drop_frames</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> unit</code></pre><div class="info">
+Request to drop any incoming frames (to be used after having
+      received the connection.close method)<br>
+</div>
+<pre><span id="VALclear_output"><span class="keyword">val</span> clear_output</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> unit</code></pre><div class="info">
+Remove any frames from output queues<br>
+</div>
+<pre><span id="VALexpect_eof"><span class="keyword">val</span> expect_eof</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> unit</code></pre><div class="info">
+Instruct the endpoint not to generate an <a href="Netamqp_types.html#EXCEPTIONUnexpected_eof"><code class="code">Netamqp_types.Unexpected_eof</code></a>
+      exception when EOF is seen from the server<br>
+</div>
+<pre><span id="VALset_max_frame_size"><span class="keyword">val</span> set_max_frame_size</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> int -> unit</code></pre><pre><span id="VALeff_max_frame_size"><span class="keyword">val</span> eff_max_frame_size</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> int</code></pre><div class="info">
+These two function talk to the transport, see
+      <code class="code">Netampq_transport.amqp_multiplex_controller</code><br>
+</div>
+<br>
+<span id="2_Sendingandreceivingmessages"><h2>Sending and receiving messages</h2></span><br>
+<pre><span id="VALannounce_e"><span class="keyword">val</span> announce_e</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> unit Uq_engines.engine</code></pre><pre><span id="VALannounce_s"><span class="keyword">val</span> announce_s</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> unit</code></pre><div class="info">
+Sends the protocol header, and waits until the response arrives.
+      If the response is the right server method, the engine finishes
+      normally. Otherwise it enters the error state.<br>
+</div>
+<pre><span id="VALsync_c2s_e"><span class="keyword">val</span> sync_c2s_e</span> : <code class="type">?no_wait:<a href="Netamqp_endpoint.html#TYPEsync_server_to_client_method_t">sync_server_to_client_method_t</a> -><br>       ?on_timeout:(unit -> unit) -><br>       <a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -><br>       <a href="Netamqp_endpoint.html#TYPEsync_client_initiated_method_t">sync_client_initiated_method_t</a> -><br>       <a href="Netamqp_endpoint.html#TYPEdata">data</a> option -><br>       <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -><br>       float -><br>       (<a href="Netamqp_endpoint.html#TYPEsync_server_to_client_method_t">sync_server_to_client_method_t</a> *<br>        <a href="Netamqp_endpoint.html#TYPEdata">data</a> option)<br>       Uq_engines.engine</code></pre><pre><span id="VALsync_c2s_s"><span class="keyword">val</span> sync_c2s_s</span> : <code class="type">?no_wait:<a href="Netamqp_endpoint.html#TYPEsync_server_to_client_method_t">sync_server_to_client_method_t</a> -><br>       ?on_timeout:(unit -> unit) -><br>       <a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -><br>       <a href="Netamqp_endpoint.html#TYPEsync_client_initiated_method_t">sync_client_initiated_method_t</a> -><br>       <a href="Netamqp_endpoint.html#TYPEdata">data</a> option -><br>       <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -><br>       float -><br>       <a href="Netamqp_endpoint.html#TYPEsync_server_to_client_method_t">sync_server_to_client_method_t</a> *<br>       <a href="Netamqp_endpoint.html#TYPEdata">data</a> option</code></pre><div class="info">
+Synchronous calls initiated by the client: Calls the argument method
+      and waits for the right reply method.
+<p>
+
+      Only certain methods may be accompanied with a data item
+      (<code class="code">`Basic_return</code>). Only certain methods
+      can have a data item in the response (<code class="code">`Basic_get_ok</code>).
+<p>
+
+      Actually, the possible return methods are much more restricted
+      than <code class="code">sync_server_to_client_method_t</code>, e.g. <code class="code">`Channel_open</code>
+      can only be responded with <code class="code">`Channel_open_ok</code>. This is not
+      reflected in the function type, though.
+<p>
+
+      The <code class="code">float</code> arg is the timeout. If the message is not responded
+      within that time frame, the exception <code class="code">Timeout</code> is raised.
+<p>
+
+      Option <code class="code">no_wait</code>: If set, the function does not wait for the reply,
+      but immediately returns the method <code class="code">no_wait</code> (and no data).
+<p>
+
+      Option <code class="code">on_timeout</code>: This function is called first when a timeout
+      occurs. (Additionally, all pending sync_c2s calls on the same
+      channel get a <code class="code">Timeout</code> exception.)<br>
+</div>
+<pre><span id="VALregister_sync_s2c"><span class="keyword">val</span> register_sync_s2c</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -><br>       <a href="Netamqp_endpoint.html#TYPEsync_server_initiated_method_type_t">sync_server_initiated_method_type_t</a> -><br>       <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -><br>       (<a href="Netamqp_endpoint.html#TYPEsync_server_initiated_method_t">sync_server_initiated_method_t</a> -><br>        <a href="Netamqp_endpoint.html#TYPEsync_client_to_server_method_t">sync_client_to_server_method_t</a> option) -><br>       (unit -> unit) -> unit</code></pre><div class="info">
+Synchronous calls initiated by the server:
+      Registers that the callback function is called 
+      when the server sends a method of the given type.
+<p>
+
+      Normally, the callback returns <code class="code">Some r</code> where <code class="code">r</code> is the
+      response method. The callback is also allowed to return <code class="code">None</code> 
+      in case of an error.
+      Some additional reaction should be provided, though, e.g. by requesting a
+      connection close.
+<p>
+
+      The post action function is only invoked if the callback returns
+      a result. The idea is that another action can be triggered after
+      the response has been added to the output queue.
+<p>
+
+      The response is not added to the normal output queue, but to
+      the priority output queue, and has precedence to all other
+      methods emitted by the client.
+<p>
+
+      The registered handler is not notified if there is a state
+      change of the endpoint or if an error is propagated. If this
+      is required, the handler should configure additional monitoring
+      for these events.<br>
+</div>
+<pre><span id="VALasync_c2s"><span class="keyword">val</span> async_c2s</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -><br>       <a href="Netamqp_endpoint.html#TYPEasync_client_to_server_method_t">async_client_to_server_method_t</a> -><br>       <a href="Netamqp_endpoint.html#TYPEdata">data</a> option -> <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -> unit</code></pre><div class="info">
+Asynchronous calls from the client: This function just 
+      sends the given method to the server. Note that the actual
+      transmission is controlled by the event loop and does not
+      happen immediately.
+<p>
+
+      Only certain methods may be accompanied with a data item
+      (<code class="code">`Basic_publish</code>).
+<p>
+
+      There is no indication of any kind whether the operation was
+      successful, not even whether it could be sent to the
+      server. If feedback is required one must use transactions
+      (<code class="code">Tx</code> class).<br>
+</div>
+<pre><span id="VALasync_c2s_e"><span class="keyword">val</span> async_c2s_e</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -><br>       <a href="Netamqp_endpoint.html#TYPEasync_client_to_server_method_t">async_client_to_server_method_t</a> -><br>       <a href="Netamqp_endpoint.html#TYPEdata">data</a> option -><br>       <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -> unit Uq_engines.engine</code></pre><pre><span id="VALasync_c2s_s"><span class="keyword">val</span> async_c2s_s</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -><br>       <a href="Netamqp_endpoint.html#TYPEasync_client_to_server_method_t">async_client_to_server_method_t</a> -><br>       <a href="Netamqp_endpoint.html#TYPEdata">data</a> option -> <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -> unit</code></pre><div class="info">
+These versions of <code class="code">async_c2s</code> return first when the message is
+      passed to the socket.<br>
+</div>
+<pre><span id="VALregister_async_s2c"><span class="keyword">val</span> register_async_s2c</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -><br>       <a href="Netamqp_endpoint.html#TYPEasync_server_to_client_method_type_t">async_server_to_client_method_type_t</a> -><br>       <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> -><br>       (<a href="Netamqp_endpoint.html#TYPEasync_server_to_client_method_t">async_server_to_client_method_t</a> -><br>        <a href="Netamqp_endpoint.html#TYPEdata">data</a> option -> unit) -><br>       unit</code></pre><div class="info">
+Asynchronous calls from the server:
+      Registers that the callback function is called
+      when the server sends a method of the given type.
+<p>
+
+      The registered handler is not notified if there is a state
+      change of the endpoint or if an error is propagated. If this
+      is required, the handler should configure additional monitoring
+      for these events.<br>
+</div>
+<br>
+<span id="2_Errorpropagation"><h2>Error propagation</h2></span><br>
+<br>
+Errors from the socket level lead immediately to
+    a shutdown of all activities, and the TCP connection breaks.
+    The state transitions to <code class="code">`Error e</code>, where the exception <code class="code">e</code>
+    describes the error. Some other kinds of locally detected errors are also
+    handled like this. After shutting the endpoint down, the error is
+    propagated (see below).
+<p>
+
+    Exception codes coming from the server are wrapped as <code class="code">`Connection_close</code>
+    or <code class="code">`Channel_close</code> methods. These are forwarded to registered
+    handlers (<code class="code">register_sync_s2c</code>). The handlers can decide to propagate
+    the error code further by calling <code class="code">propagate_error</code> with a
+    <code class="code">Method_exception</code>.
+<p>
+
+    Error propagation is done for all errors detected by the endpoint,
+    but it can also be invoked from outside (function <code class="code">propagate_error</code>,
+    see below).
+<p>
+
+    The following kinds of errors can be generated by the endpoint:
+<p>
+<ul>
+<li>Socket errors (as <code class="code">Unix.Unix_error</code>) (1) (2)</li>
+<li>Decoder errors (as <code class="code">Netamqp_types.Decode</code>) (1) (2)</li>
+<li>Encoder errors (as <code class="code">Netamqp_types.Encode</code>) (1) (2)</li>
+<li><a href="Netamqp_types.html#EXCEPTIONProtocol_is_not_supported"><code class="code">Netamqp_types.Protocol_is_not_supported</code></a> (1) (2)</li>
+<li><a href="Netamqp_types.html#EXCEPTIONTimeout"><code class="code">Netamqp_types.Timeout</code></a>: when a synchronous call times out</li>
+<li><a href="Netamqp_types.html#EXCEPTIONMethod_cannot_be_dispatched"><code class="code">Netamqp_types.Method_cannot_be_dispatched</code></a>: when the endpoint
+        finds a frame
+        that can be decoded but not be dispatched (no handler) (2)</li>
+<li><a href="Netamqp_types.html#EXCEPTIONUnexpected_eof"><code class="code">Netamqp_types.Unexpected_eof</code></a> (1) (2)</li>
+<li><a href="Netamqp_types.html#EXCEPTIONUnexpected_frame"><code class="code">Netamqp_types.Unexpected_frame</code></a> (1) (2)</li>
+</ul>
+
+    (1) = The endpoint is automatically shut down as described
+<p>
+
+    (2) = This error is not associated to a particular channel
+<p>
+
+    The following codes should be used for injecting errors from outside:<ul>
+<li><a href="Netamqp_types.html#EXCEPTIONMethod_exception"><code class="code">Netamqp_types.Method_exception</code></a>: for all exceptions coming from the 
+      server</li>
+<li><a href="Netamqp_types.html#EXCEPTIONProtocol_violation"><code class="code">Netamqp_types.Protocol_violation</code></a>: for all hard violations of the 
+      protocol, especially those that lead to a shutdown</li>
+<li><a href="Netamqp_types.html#EXCEPTIONMethod_dropped"><code class="code">Netamqp_types.Method_dropped</code></a>: when a synchronous call cannot
+      be continued because
+      the client is shut down, and no better error code exists</li>
+</ul>
+<br>
+<pre><span id="VALpropagate_error"><span class="keyword">val</span> propagate_error</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> exn -> <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> option -> unit</code></pre><div class="info">
+Propagate the exception to handlers and engines.
+<p>
+
+      If the channel is <code class="code">None</code>, all possible handlers and engines receive
+      the exception. Otherwise, only the handlers and engines get it that
+      are connected with the given channel.
+<p>
+
+      The engines and handlers receiving the exceptions:<ul>
+<li><code class="code">announce_e</code></li>
+<li><code class="code">sync_c2s_e</code></li>
+<li>The defined listeners (<code class="code">listen_for_errors</code>).</li>
+</ul>
+
+      Note that there is no way to notify registered handlers that
+      just wait for incoming server methods (<code class="code">register_sync_s2c</code> and
+      <code class="code">register_async_s2c</code>). If these handlers need to be notified about
+      errors they should register an error listener.
+<p>
+
+      The endpoint state is not modified.<br>
+</div>
+<pre><span id="VALabort_and_propagate_error"><span class="keyword">val</span> abort_and_propagate_error</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -> exn -> unit</code></pre><div class="info">
+The endpoint is aborted and set to the <code class="code">`Error</code> state. Also,
+      the passed exception is propagated unconditionally.<br>
+</div>
+<pre><span id="VALlisten_for_errors"><span class="keyword">val</span> listen_for_errors</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">endpoint</a> -><br>       <a href="Netamqp_types.html#TYPEchannel">Netamqp_types.channel</a> option -> (exn -> bool) -> unit</code></pre><div class="info">
+Defines an error listener.
+<p>
+
+      The callback function must return <code class="code">true</code> to remain active; otherwise
+      the listener is disabled.<br>
+</div>
+<pre><span id="VALcreate_method_exception"><span class="keyword">val</span> create_method_exception</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEprotocol">protocol</a> -><br>       class_id:int -> meth_id:int -> reply_code:int -> reply_text:string -> exn</code></pre><div class="info">
+Returns a <code class="code">Method_exception</code><br>
+</div>
+<pre><span class="keyword">module</span> <a href="Netamqp_endpoint.Debug.html">Debug</a>: <code class="code">sig</code> <a href="Netamqp_endpoint.Debug.html">..</a> <code class="code">end</code></pre></body></html>

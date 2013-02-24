@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Netamqp_rtypes.html">
+<link rel="next" href="Netamqp_transport.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><link title="Transport" rel="Section" href="#1_Transport">
+<title>Netamqp - AMQP client : Netamqp_types</title>
+</head>
+<body>
+<div class="navbar"><a href="Netamqp_rtypes.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Netamqp_transport.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Netamqp_types.html">Netamqp_types</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Netamqp_types: <code class="code">sig</code> <a href="Netamqp_types.html">..</a> <code class="code">end</code></pre>General types for AMQP<br>
+<hr width="100%">
+<br>
+<span id="1_Transport"><h1>Transport</h1></span><br>
+<pre><span id="TYPEchannel"><span class="keyword">type</span> <code class="type"></code>channel</span> = <code class="type">int</code> </pre>
+<div class="info">
+AMQP channels have numbers 0-65535. Channel 0 has a special function<br>
+</div>
+
+<pre><span id="TYPEtransport_type"><span class="keyword">type</span> <code class="type"></code>transport_type</span> = <code class="type">[ `SSL | `TCP ]</code> </pre>
+
+<pre><span id="TYPEframe_type"><span class="keyword">type</span> <code class="type"></code>frame_type</span> = <code class="type">[ `Body | `Header | `Heartbeat | `Method | `Proto_header ]</code> </pre>
+
+<br><code><span id="TYPEframe"><span class="keyword">type</span> <code class="type"></code>frame</span> = {</code><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code>frame_type&nbsp;: <code class="type"><a href="Netamqp_types.html#TYPEframe_type">frame_type</a></code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code>frame_channel&nbsp;: <code class="type"><a href="Netamqp_types.html#TYPEchannel">channel</a></code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code>frame_payload&nbsp;: <code class="type">Xdr_mstring.mstring list</code>;</code></td>
+
+</tr></table>
+}
+
+<div class="info">
+A frame is the transport unit on the wire.
+<p>
+
+      The <code class="code">frame_payload</code> may be based on strings or bigarrays. The
+      current implementation will always use the string-based 
+      representation for received frames ( - in the future this might
+      become configurable). For sent frames both representations are
+      supported equally well.
+<p>
+
+      For a type <code class="code">`Proto_header</code>, the payload consists of the three
+      bytes describing the protocol version (major version, minor
+      version, revision).<br>
+</div>
+
+<pre><span id="EXCEPTIONDecode_error"><span class="keyword">exception</span> Decode_error</span> <span class="keyword">of</span> <code class="type">string</code></pre>
+<div class="info">
+Cannot decode data from the server<br>
+</div>
+<pre><span id="EXCEPTIONEncode_error"><span class="keyword">exception</span> Encode_error</span> <span class="keyword">of</span> <code class="type">string</code></pre>
+<div class="info">
+Cannot encode a message to the binary format<br>
+</div>
+<pre><span id="EXCEPTIONNot_connected"><span class="keyword">exception</span> Not_connected</span></pre>
+<div class="info">
+The endpoint is not in <code class="code">`Connected</code> state and cannot accept new 
+      requests<br>
+</div>
+<pre><span id="EXCEPTIONTimeout"><span class="keyword">exception</span> Timeout</span></pre>
+<div class="info">
+Sync calls get timeout<br>
+</div>
+<pre><span id="EXCEPTIONMethod_dropped"><span class="keyword">exception</span> Method_dropped</span></pre>
+<div class="info">
+The channel or connection is now down, and the method
+      cannot be continued<br>
+</div>
+<pre><span id="EXCEPTIONUnexpected_eof"><span class="keyword">exception</span> Unexpected_eof</span></pre>
+<div class="info">
+Got an EOF from the server but was not expecting it<br>
+</div>
+<pre><span id="EXCEPTIONMethod_cannot_be_dispatched"><span class="keyword">exception</span> Method_cannot_be_dispatched</span> <span class="keyword">of</span> <code class="type"><a href="Netamqp_types.html#TYPEchannel">channel</a> * string</code></pre>
+<div class="info">
+No handler is defined for this<br>
+</div>
+<pre><span id="EXCEPTIONUnexpected_frame"><span class="keyword">exception</span> Unexpected_frame</span> <span class="keyword">of</span> <code class="type"><a href="Netamqp_types.html#TYPEframe">frame</a></code></pre>
+<div class="info">
+This type of frame is unexpected now<br>
+</div>
+<pre><span id="EXCEPTIONMethod_exception"><span class="keyword">exception</span> Method_exception</span> <span class="keyword">of</span> <code class="type">string * int * string</code></pre>
+<div class="info">
+An exception token wrapped as <code class="code">connection.close</code> or <code class="code">channel.close</code> 
+      method
+<p>
+
+      First arg: name of method<br>
+</div>
+<pre><span id="EXCEPTIONProtocol_is_not_supported"><span class="keyword">exception</span> Protocol_is_not_supported</span></pre>
+<div class="info">
+The server does not support our protocol version<br>
+</div>
+<pre><span id="EXCEPTIONProtocol_violation"><span class="keyword">exception</span> Protocol_violation</span> <span class="keyword">of</span> <code class="type">string</code></pre>
+<div class="info">
+A violation of the protocol (invalid sequence of methods)<br>
+</div>
+<pre><span id="VALstring_of_frame_type"><span class="keyword">val</span> string_of_frame_type</span> : <code class="type"><a href="Netamqp_types.html#TYPEframe_type">frame_type</a> -> string</code></pre></body></html>

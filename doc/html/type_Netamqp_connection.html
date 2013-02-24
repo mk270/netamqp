@@ -1,0 +1,46 @@
+<html><head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_connection</title>
+</head>
+<body>
+<code class="code"><span class="keyword">sig</span><br>
+&nbsp;&nbsp;<span class="keyword">exception</span>&nbsp;<span class="constructor">Not_open</span><br>
+&nbsp;&nbsp;<span class="keyword">exception</span>&nbsp;<span class="constructor">Error</span>&nbsp;<span class="keyword">of</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;connection<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;auth_method<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;locale_preference&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Pref</span>&nbsp;<span class="keyword">of</span>&nbsp;string&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Select</span>&nbsp;<span class="keyword">of</span>&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;create&nbsp;:&nbsp;<span class="constructor">Netamqp_endpoint</span>.endpoint&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_connection</span>.connection<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_e&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_connection</span>.connection&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_connection</span>.auth_method&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_connection</span>.locale_preference&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="constructor">Uq_engines</span>.engine<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_s&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_connection</span>.connection&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_connection</span>.auth_method&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_connection</span>.locale_preference&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;close_e&nbsp;:&nbsp;<span class="constructor">Netamqp_connection</span>.connection&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="constructor">Uq_engines</span>.engine<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;close_s&nbsp;:&nbsp;<span class="constructor">Netamqp_connection</span>.connection&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_open&nbsp;:&nbsp;<span class="constructor">Netamqp_connection</span>.connection&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;plain_auth&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_connection</span>.auth_method<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;endpoint&nbsp;:&nbsp;<span class="constructor">Netamqp_connection</span>.connection&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_endpoint</span>.endpoint<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;event_system&nbsp;:&nbsp;<span class="constructor">Netamqp_connection</span>.connection&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Unixqueue</span>.event_system<br>
+<span class="keyword">end</span></code></body></html>

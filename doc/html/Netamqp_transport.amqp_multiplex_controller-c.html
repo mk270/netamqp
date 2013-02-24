@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="Up" href="Netamqp_transport.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_transport.amqp_multiplex_controller</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a href="Netamqp_transport.html">Up</a>
+&nbsp;</div>
+<center><h1>Class type <a href="type_Netamqp_transport.amqp_multiplex_controller.html">Netamqp_transport.amqp_multiplex_controller</a></h1></center>
+<br>
+<pre><span id="TYPEamqp_multiplex_controller"><span class="keyword">class type</span> amqp_multiplex_controller</span> = <code class="code">object</code> <a href="Netamqp_transport.amqp_multiplex_controller-c.html">..</a> <code class="code">end</code></pre><hr width="100%">
+<pre><span id="METHODalive"><span class="keyword">method</span> alive</span> : <code class="type">bool</code></pre><div class="info">
+If the controller is alive, the socket is not yet completely down.<br>
+</div>
+<pre><span id="METHODevent_system"><span class="keyword">method</span> event_system</span> : <code class="type">Unixqueue.event_system</code></pre><div class="info">
+Returns the event system<br>
+</div>
+<pre><span id="METHODgetsockname"><span class="keyword">method</span> getsockname</span> : <code class="type"><a href="Netamqp_transport.html#TYPEsockaddr">sockaddr</a></code></pre><div class="info">
+The address of this socket<br>
+</div>
+<pre><span id="METHODgetpeername"><span class="keyword">method</span> getpeername</span> : <code class="type"><a href="Netamqp_transport.html#TYPEsockaddr">sockaddr</a></code></pre><div class="info">
+The address of the peer's socket. Only available if the socket
+ is connected. (Fails otherwise.)<br>
+</div>
+<pre><span id="METHODtransport_type"><span class="keyword">method</span> transport_type</span> : <code class="type"><a href="Netamqp_types.html#TYPEtransport_type">Netamqp_types.transport_type</a></code></pre><div class="info">
+The transport type<br>
+</div>
+<pre><span id="METHODset_max_frame_size"><span class="keyword">method</span> set_max_frame_size</span> : <code class="type">int -> unit</code></pre><div class="info">
+The maximum frame size. By default, this is 2^32-1 on 64 bit
+	platforms, and <code class="code">Sys.max_string_length</code> on 32 bit platforms.
+	The defaults are also the maximum possible values - larger
+	configurations are automatically clipped to the maximum<br>
+</div>
+<pre><span id="METHODeff_max_frame_size"><span class="keyword">method</span> eff_max_frame_size</span> : <code class="type">int</code></pre><div class="info">
+The effective maximum frame size<br>
+</div>
+<pre><span id="METHODreading"><span class="keyword">method</span> reading</span> : <code class="type">bool</code></pre><div class="info">
+True iff there is a reader<br>
+</div>
+<pre><span id="METHODread_eof"><span class="keyword">method</span> read_eof</span> : <code class="type">bool</code></pre><div class="info">
+Whether the EOF marker has been read<br>
+</div>
+<pre><span id="METHODstart_reading"><span class="keyword">method</span> start_reading</span> : <code class="type">when_done:(<a href="Netamqp_types.html#TYPEframe">Netamqp_types.frame</a> <a href="Netamqp_transport.html#TYPEresult_eof">result_eof</a> -> unit) -><br>       unit -> unit</code></pre><div class="info">
+Start reading from the connection. When a whole message has been
+ received, the <code class="code">when_done</code> callback is invoked with the
+ received <code class="code">frame</code> as argument.
+<p>
+
+ This starts one-time read job only, i.e. it is not restarted
+ after <code class="code">when_done</code> has been invoked.
+<p>
+
+ It is an error to start reading several times at once.<br>
+</div>
+<pre><span id="METHODwriting"><span class="keyword">method</span> writing</span> : <code class="type">bool</code></pre><div class="info">
+True iff there is a writer<br>
+</div>
+<pre><span id="METHODstart_writing"><span class="keyword">method</span> start_writing</span> : <code class="type">when_done:(unit <a href="Netamqp_transport.html#TYPEresult">result</a> -> unit) -><br>       <a href="Netamqp_types.html#TYPEframe">Netamqp_types.frame</a> -> unit</code></pre><div class="info">
+Starts writing the frame. Invoked <code class="code">when_done</code> when it is written,
+ or an error condition is reached.
+<p>
+
+ This starts one-time write job only, i.e. it is not restarted
+ after <code class="code">when_done</code> has been invoked.
+<p>
+
+ It is an error to start writing several times at once.<br>
+</div>
+<pre><span id="METHODcancel_rd_polling"><span class="keyword">method</span> cancel_rd_polling</span> : <code class="type">unit -> unit</code></pre><div class="info">
+Cancels polling for the next input message. This method must not be
+ called from the <code class="code">before_record</code> callback function. Polling can be
+ resumed by calling <code class="code">start_reading</code> again.<br>
+</div>
+<pre><span id="METHODabort_rw"><span class="keyword">method</span> abort_rw</span> : <code class="type">unit -> unit</code></pre><div class="info">
+Aborts the current reader and/or writer forever. Note that there is no
+ clean way of resuming reading and/or writing. The readers/writers
+ are not notified about cancellation.<br>
+</div>
+<pre><span id="METHODstart_shutting_down"><span class="keyword">method</span> start_shutting_down</span> : <code class="type">when_done:(unit <a href="Netamqp_transport.html#TYPEresult">result</a> -> unit) -> unit -> unit</code></pre><div class="info">
+Start shutting down the connection. After going through the shutdown
+ procedure, the <code class="code">when_done</code> callback is invoked reporting the success
+ or failure.
+<p>
+
+ The underlying file descriptor (if any) is not closed. A shutdown
+ is only a protocol handshake. After a shutdown,<code class="code">read_eof</code>
+ is true. Call <code class="code">inactivate</code> to close the descriptor.<br>
+</div>
+<pre><span id="METHODcancel_shutting_down"><span class="keyword">method</span> cancel_shutting_down</span> : <code class="type">unit -> unit</code></pre><div class="info">
+Cancels the shutdown procedure. After that, the state of the 
+ connection is undefined. The <code class="code">when_done</code> callback is invoked with
+ the <code class="code">`Cancelled</code>.
+<p>
+
+ It is no error if no shutdown is in progress.<br>
+</div>
+<pre><span id="METHODset_timeout"><span class="keyword">method</span> set_timeout</span> : <code class="type">notify:(unit -> unit) -> float -> unit</code></pre><div class="info">
+If a requested read or write cannot be done for the passed number of
+ seconds, the <code class="code">notify</code> callback is invoked.<br>
+</div>
+<pre><span id="METHODinactivate"><span class="keyword">method</span> inactivate</span> : <code class="type">unit -> unit</code></pre><div class="info">
+Inactivates the connection immediately, and releases any resources
+ the controller is responsible for (e.g. closes file descriptors). 
+ Note that this is more than
+ cancelling all pending operations and shutting the connection down.
+ However, the details of this method are implementation-defined.
+ Callbacks are not invoked.<br>
+</div>
+</body></html>

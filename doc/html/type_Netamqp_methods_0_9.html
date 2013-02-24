@@ -1,0 +1,492 @@
+<html><head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_methods_0_9</title>
+</head>
+<body>
+<code class="code"><span class="keyword">sig</span><br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;no_ack&nbsp;=&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;octet&nbsp;=&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;reply_code&nbsp;=&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;redelivered&nbsp;=&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;peer_properties&nbsp;=&nbsp;<span class="constructor">Netamqp_rtypes</span>.table<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;queue_name&nbsp;=&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;table&nbsp;=&nbsp;<span class="constructor">Netamqp_rtypes</span>.table<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;timestamp&nbsp;=&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;longstr&nbsp;=&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;long&nbsp;=&nbsp;<span class="constructor">Rtypes</span>.uint4<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;short&nbsp;=&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;shortstr&nbsp;=&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;bit&nbsp;=&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;consumer_tag&nbsp;=&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;method_id&nbsp;=&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;path&nbsp;=&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;no_local&nbsp;=&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;reply_text&nbsp;=&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;exchange_name&nbsp;=&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;longlong&nbsp;=&nbsp;<span class="constructor">Rtypes</span>.uint8<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;class_id&nbsp;=&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;no_wait&nbsp;=&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;message_count&nbsp;=&nbsp;<span class="constructor">Rtypes</span>.uint4<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;delivery_tag&nbsp;=&nbsp;<span class="constructor">Rtypes</span>.uint8<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Connection_start&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.octet&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.octet&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.peer_properties&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.longstr&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.longstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Connection_start_ok&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.peer_properties&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.longstr&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Connection_secure&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.longstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Connection_secure_ok&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.longstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Connection_tune&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.long&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Connection_tune_ok&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.long&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Connection_open&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.path&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Connection_open_ok&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Connection_close&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.reply_code&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.reply_text&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.class_id&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_id<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Channel_open&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Channel_open_ok&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.longstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Channel_flow&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Channel_flow_ok&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Channel_close&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.reply_code&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.reply_text&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.class_id&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_id<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Exchange_declare&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.exchange_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_wait&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.table<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Exchange_delete&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.exchange_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_wait<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Queue_declare&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.queue_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_wait&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.table<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Queue_declare_ok&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.queue_name&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.message_count&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.long<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Queue_bind&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.queue_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.exchange_name&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_wait&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.table<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Queue_unbind&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.queue_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.exchange_name&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.table<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Queue_purge&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.queue_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_wait<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Queue_purge_ok&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.message_count<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Queue_delete&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.queue_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_wait<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Queue_delete_ok&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.message_count<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_qos&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.long&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_consume&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.queue_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.consumer_tag&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_local&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_ack&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_wait&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.table<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_consume_ok&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.consumer_tag<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_cancel&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.consumer_tag&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_wait<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_cancel_ok&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.consumer_tag<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_publish&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.exchange_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_return&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.reply_code&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.reply_text&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.exchange_name&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_deliver&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.consumer_tag&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.delivery_tag&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.redelivered&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.exchange_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_get&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.short&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.queue_name&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.no_ack<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_get_ok&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.delivery_tag&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.redelivered&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.exchange_name&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.message_count<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_get_empty&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_ack&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.delivery_tag&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_reject&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.delivery_tag&nbsp;*&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_recover_async&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;arg_Basic_recover&nbsp;=&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.bit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;method_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_ack</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_ack<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_cancel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_cancel_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_consume<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_consume_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_deliver</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_deliver<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_get<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_empty</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_get_empty<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_get_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_publish</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_publish<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_qos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_recover<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover_async</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_recover_async<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_reject</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_reject<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_return</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_flow<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_flow_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_open<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_open_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_open<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_open_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_secure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_secure_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_start<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_start_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_tune<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_tune_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Exchange_declare<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Exchange_delete<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_bind<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_declare<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_declare_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_delete<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_delete_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_purge<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_purge_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_unbind<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select_ok</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;sync_client_to_server_method_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_cancel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_consume<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_get<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_qos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_recover<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_flow<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_flow_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_open<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_open<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_secure_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_start_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_tune_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Exchange_declare<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Exchange_delete<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_bind<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_declare<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_delete<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_purge<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_unbind<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;sync_server_to_client_method_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_cancel_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_consume_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_empty</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_get_empty<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_get_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_flow<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_flow_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_open_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_open_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_secure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_start<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_tune<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_declare_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_delete_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_purge_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select_ok</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;sync_client_initiated_method_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_cancel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_consume<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_get<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_qos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_recover<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_flow<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_open<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_open<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Exchange_declare<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Exchange_delete<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_bind<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_declare<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_delete<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_purge<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Queue_unbind<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;sync_server_initiated_method_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Channel_flow<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_secure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_start<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Connection_tune&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;async_client_to_server_method_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_ack</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_ack<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_publish</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_publish<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover_async</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_recover_async<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_reject</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_reject&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;async_server_to_client_method_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_deliver</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_deliver<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_return</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_return&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;content_method_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_deliver</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_deliver<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_ok</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_get_ok<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_publish</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_publish<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_return</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.arg_Basic_return&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;method_type_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_ack</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_deliver</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_empty</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_publish</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover_async</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_reject</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_return</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select_ok</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;sync_client_to_server_method_type_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;sync_server_to_client_method_type_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_empty</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback_ok</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select_ok</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;sync_client_initiated_method_type_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_cancel</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_consume</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_qos</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_open</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_open</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_declare</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Exchange_delete</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_bind</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_declare</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_delete</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_purge</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Queue_unbind</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_commit</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_rollback</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Tx_select</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;sync_server_initiated_method_type_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Channel_flow</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_close</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_secure</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_start</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Connection_tune</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;async_client_to_server_method_type_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_ack</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_publish</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_recover_async</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_reject</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;async_server_to_client_method_type_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_deliver</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_return</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;content_method_type_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_deliver</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_get_ok</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_publish</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Basic_return</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;type_of_method&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_type_t<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;responses_of_method&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_type_t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_type_t&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;content_method_types&nbsp;:&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_type_t&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;string_of_method_type&nbsp;:&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_type_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;string_of_method_id&nbsp;:&nbsp;class_id:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;meth_id:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;props_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">P_basic</span>&nbsp;<span class="keyword">of</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.table&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.octet&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.octet&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.timestamp&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.shortstr&nbsp;option<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">P_channel</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">P_connection</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">P_exchange</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">P_queue</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">P_tx</span>&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;message_t&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;<span class="keywordsign">`</span><span class="constructor">Body</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Xdr_mstring</span>.mstring&nbsp;list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Header</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.props_t&nbsp;*&nbsp;int64<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Heartbeat</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Method</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="keywordsign">`</span><span class="constructor">Proto_header</span>&nbsp;<span class="keyword">of</span>&nbsp;string&nbsp;]<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;decode_method_message&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_types</span>.frame&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_t<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;encode_method_message&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.method_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_types</span>.frame<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;decode_header_message&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_types</span>.frame&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.props_t&nbsp;*&nbsp;int64<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;encode_header_message&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.props_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int64&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_types</span>.frame<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;encode_heartbeat_message&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_types</span>.frame<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;encode_body_message&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Xdr_mstring</span>.mstring&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_types</span>.frame<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;encode_proto_header_message&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_types</span>.frame<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;decode_message&nbsp;:&nbsp;<span class="constructor">Netamqp_types</span>.frame&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.message_t<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;encode_message&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_methods_0_9</span>.message_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Netamqp_types</span>.frame<br>
+<span class="keyword">end</span></code></body></html>

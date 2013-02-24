@@ -1,0 +1,23 @@
+Prerequisites:
+
+ - omake
+ - Ocamlnet (version 3.2 or better)
+ - findlib (ocamlfind)
+ - pcre-ocaml
+
+The prerequisites must be installed so that findlib (ocamlfind) knows
+about them.
+
+If you want to regenerate the methods file with amqp_gen, you will also
+need PXP. Normally, this is not needed, though.
+
+Then:
+
+ - make all
+
+   builds the software
+
+ - make install
+
+   installs the software at the location findlib suggests
+

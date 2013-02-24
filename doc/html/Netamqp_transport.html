@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Netamqp_types.html">
+<link rel="next" href="Netamqp_methods_0_9.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><link title="Debugging" rel="Section" href="#1_Debugging">
+<title>Netamqp - AMQP client : Netamqp_transport</title>
+</head>
+<body>
+<div class="navbar"><a href="Netamqp_types.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Netamqp_methods_0_9.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Netamqp_transport.html">Netamqp_transport</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Netamqp_transport: <code class="code">sig</code> <a href="Netamqp_transport.html">..</a> <code class="code">end</code></pre>Low-level AMQP transporters<br>
+<hr width="100%">
+<pre><span id="TYPEresult"><span class="keyword">type</span> <code class="type">'a</code> result</span> = <code class="type">[ `Error of exn | `Ok of 'a ]</code> </pre>
+
+<pre><span id="TYPEresult_eof"><span class="keyword">type</span> <code class="type">'a</code> result_eof</span> = <code class="type">[ `End_of_file | `Error of exn | `Ok of 'a ]</code> </pre>
+
+<pre><span id="TYPEsockaddr"><span class="keyword">type</span> <code class="type"></code>sockaddr</span> = <code class="type">[ `Implied | `Sockaddr of Unix.sockaddr ]</code> </pre>
+
+<pre><span id="VALstring_of_sockaddr"><span class="keyword">val</span> string_of_sockaddr</span> : <code class="type"><a href="Netamqp_transport.html#TYPEsockaddr">sockaddr</a> -> string</code></pre><div class="info">
+Convert to string, for debugging purposes<br>
+</div>
+<pre><span id="EXCEPTIONError"><span class="keyword">exception</span> Error</span> <span class="keyword">of</span> <code class="type">string</code></pre>
+<div class="info">
+Passed back as <code class="code">`Error</code>. Such errors are fatal.<br>
+</div>
+<pre><span id="TYPEamqp_multiplex_controller"><span class="keyword">class type</span> <a href="Netamqp_transport.amqp_multiplex_controller-c.html">amqp_multiplex_controller</a></span> = <code class="code">object</code> <a href="Netamqp_transport.amqp_multiplex_controller-c.html">..</a> <code class="code">end</code></pre><pre><span id="VALtcp_amqp_multiplex_controller"><span class="keyword">val</span> tcp_amqp_multiplex_controller</span> : <code class="type">?close_inactive_descr:bool -><br>       ?preclose:(unit -> unit) -><br>       Unix.file_descr -><br>       Unixqueue.event_system -> <a href="Netamqp_transport.amqp_multiplex_controller-c.html">amqp_multiplex_controller</a></code></pre><div class="info">
+The multiplex controller for stream encapsulation
+<p>
+<ul>
+<li><code class="code">close_inactive_descr</code>: If true, the descriptor is closed when
+        inactivated</li>
+<li><code class="code">preclose</code>: This function is called just before the descriptor
+        is closed.</li>
+</ul>
+<br>
+</div>
+<br>
+<span id="1_Debugging"><h1>Debugging</h1></span><br>
+<pre><span class="keyword">module</span> <a href="Netamqp_transport.Debug.html">Debug</a>: <code class="code">sig</code> <a href="Netamqp_transport.Debug.html">..</a> <code class="code">end</code></pre></body></html>

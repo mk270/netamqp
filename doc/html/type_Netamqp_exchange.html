@@ -1,0 +1,65 @@
+<html><head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_exchange</title>
+</head>
+<body>
+<code class="code"><span class="keyword">sig</span><br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;exchange_name&nbsp;=&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;amq_direct&nbsp;:&nbsp;<span class="constructor">Netamqp_exchange</span>.exchange_name<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;amq_fanout&nbsp;:&nbsp;<span class="constructor">Netamqp_exchange</span>.exchange_name<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;amq_topic&nbsp;:&nbsp;<span class="constructor">Netamqp_exchange</span>.exchange_name<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;amq_match&nbsp;:&nbsp;<span class="constructor">Netamqp_exchange</span>.exchange_name<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;exchange_type&nbsp;=&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;direct&nbsp;:&nbsp;<span class="constructor">Netamqp_exchange</span>.exchange_type<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fanout&nbsp;:&nbsp;<span class="constructor">Netamqp_exchange</span>.exchange_type<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;topic&nbsp;:&nbsp;<span class="constructor">Netamqp_exchange</span>.exchange_type<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;headers&nbsp;:&nbsp;<span class="constructor">Netamqp_exchange</span>.exchange_type<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;system&nbsp;:&nbsp;<span class="constructor">Netamqp_exchange</span>.exchange_type<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;declare_passively_e&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;channel:<span class="constructor">Netamqp_channel</span>.channel_obj&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;exchange_name:<span class="constructor">Netamqp_exchange</span>.exchange_name&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?no_wait:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="constructor">Uq_engines</span>.engine<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;declare_passively_s&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;channel:<span class="constructor">Netamqp_channel</span>.channel_obj&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;exchange_name:<span class="constructor">Netamqp_exchange</span>.exchange_name&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?no_wait:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;declare_e&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;channel:<span class="constructor">Netamqp_channel</span>.channel_obj&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;exchange_name:<span class="constructor">Netamqp_exchange</span>.exchange_name&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;exchange_type:<span class="constructor">Netamqp_exchange</span>.exchange_type&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?durable:bool&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?no_wait:bool&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?arguments:<span class="constructor">Netamqp_rtypes</span>.table&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="constructor">Uq_engines</span>.engine<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;declare_s&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;channel:<span class="constructor">Netamqp_channel</span>.channel_obj&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;exchange_name:<span class="constructor">Netamqp_exchange</span>.exchange_name&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;exchange_type:<span class="constructor">Netamqp_exchange</span>.exchange_type&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?durable:bool&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?no_wait:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?arguments:<span class="constructor">Netamqp_rtypes</span>.table&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;delete_e&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;channel:<span class="constructor">Netamqp_channel</span>.channel_obj&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;exchange_name:<span class="constructor">Netamqp_exchange</span>.exchange_name&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?if_unused:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?no_wait:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="constructor">Uq_engines</span>.engine<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;delete_s&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;channel:<span class="constructor">Netamqp_channel</span>.channel_obj&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;exchange_name:<span class="constructor">Netamqp_exchange</span>.exchange_name&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?if_unused:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?no_wait:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+<span class="keyword">end</span></code></body></html>

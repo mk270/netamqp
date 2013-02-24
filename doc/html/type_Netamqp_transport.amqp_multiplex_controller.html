@@ -1,0 +1,48 @@
+<html><head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_transport.amqp_multiplex_controller</title>
+</head>
+<body>
+<code class="code"><span class="keyword">object</span><br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;abort_rw&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;alive&nbsp;:&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;cancel_rd_polling&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;cancel_shutting_down&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;eff_max_frame_size&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;event_system&nbsp;:&nbsp;<span class="constructor">Unixqueue</span>.event_system<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;getpeername&nbsp;:&nbsp;<span class="constructor">Netamqp_transport</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;getsockname&nbsp;:&nbsp;<span class="constructor">Netamqp_transport</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;inactivate&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;read_eof&nbsp;:&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;reading&nbsp;:&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;set_max_frame_size&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;set_timeout&nbsp;:&nbsp;notify:(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;start_reading&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;when_done:(<span class="constructor">Netamqp_types</span>.frame&nbsp;<span class="constructor">Netamqp_transport</span>.result_eof&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;start_shutting_down&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;when_done:(unit&nbsp;<span class="constructor">Netamqp_transport</span>.result&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;start_writing&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;when_done:(unit&nbsp;<span class="constructor">Netamqp_transport</span>.result&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Netamqp_types</span>.frame&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;transport_type&nbsp;:&nbsp;<span class="constructor">Netamqp_types</span>.transport_type<br>
+&nbsp;&nbsp;<span class="keyword">method</span>&nbsp;writing&nbsp;:&nbsp;bool<br>
+<span class="keyword">end</span></code></body></html>

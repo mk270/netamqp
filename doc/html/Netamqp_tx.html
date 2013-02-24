@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Netamqp_basic.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_tx</title>
+</head>
+<body>
+<div class="navbar"><a href="Netamqp_basic.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;</div>
+<center><h1>Module <a href="type_Netamqp_tx.html">Netamqp_tx</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Netamqp_tx: <code class="code">sig</code> <a href="Netamqp_tx.html">..</a> <code class="code">end</code></pre>Transactions<br>
+<hr width="100%">
+<br>
+Transactions cover only the <code class="code">publish</code> and <code class="code">ack</code> methods<br>
+<pre><span id="VALselect_e"><span class="keyword">val</span> select_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -> unit -> unit Uq_engines.engine</code></pre><pre><span id="VALselect_s"><span class="keyword">val</span> select_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -> unit -> unit</code></pre><div class="info">
+Selects transactions for this channel<br>
+</div>
+<pre><span id="VALcommit_e"><span class="keyword">val</span> commit_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -> unit -> unit Uq_engines.engine</code></pre><pre><span id="VALcommit_s"><span class="keyword">val</span> commit_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -> unit -> unit</code></pre><div class="info">
+Commits the current transaction and starts a new one<br>
+</div>
+<pre><span id="VALrollback_e"><span class="keyword">val</span> rollback_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -> unit -> unit Uq_engines.engine</code></pre><pre><span id="VALrollback_s"><span class="keyword">val</span> rollback_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -> unit -> unit</code></pre><div class="info">
+Rolls the current transaction back and starts a new one<br>
+</div>
+</body></html>

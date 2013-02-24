@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Netamqp_connection.html">
+<link rel="next" href="Netamqp_exchange.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_channel</title>
+</head>
+<body>
+<div class="navbar"><a href="Netamqp_connection.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Netamqp_exchange.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Netamqp_channel.html">Netamqp_channel</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Netamqp_channel: <code class="code">sig</code> <a href="Netamqp_channel.html">..</a> <code class="code">end</code></pre>Manage AMQP channels<br>
+<hr width="100%">
+<br>
+A channel is a data path between the client and the server. Several
+    channels are multiplexed over a single TCP connection.
+<p>
+
+    The client chooses the channel number identifying the channel.
+    It is allowed to reuse channel numbers after closing a channel.
+<p>
+
+    Channels are equipped with flow control: If the server demands to
+    send content data slower, the client will respond to this. There
+    is no configuration necessary to enable this feature.
+<p>
+
+    Channels can be closed by either peer. It is possible to transmit
+    error codes at channel close time.<br>
+<pre><span id="EXCEPTIONNot_open"><span class="keyword">exception</span> Not_open</span></pre>
+<div class="info">
+Raised if the channel is not known to be open on the client side<br>
+</div>
+<pre><span id="EXCEPTIONError"><span class="keyword">exception</span> Error</span> <span class="keyword">of</span> <code class="type">string</code></pre>
+<div class="info">
+An error occurred in channel management<br>
+</div>
+<pre><span id="TYPEchannel"><span class="keyword">type</span> <code class="type"></code>channel</span> = <code class="type">int</code> </pre>
+<div class="info">
+A channel number is an int from 0 to 65535. Channel 0 is reserved, so
+      channel numbers &gt;= 1 can be used by the application.<br>
+</div>
+
+<pre><span id="TYPEchannel_obj"><span class="keyword">type</span> <code class="type"></code>channel_obj</span> </pre>
+<div class="info">
+A channel management object<br>
+</div>
+
+<pre><span id="VALopen_e"><span class="keyword">val</span> open_e</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">Netamqp_connection.connection</a> -><br>       <a href="Netamqp_channel.html#TYPEchannel">channel</a> -> <a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> Uq_engines.engine</code></pre><div class="info">
+Opens a channel on this connection. Fails if the channel is already
+      known to be open on the client side.<br>
+</div>
+<pre><span id="VALopen_s"><span class="keyword">val</span> open_s</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">Netamqp_connection.connection</a> -><br>       <a href="Netamqp_channel.html#TYPEchannel">channel</a> -> <a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a></code></pre><div class="info">
+Same as synchronous call<br>
+</div>
+<pre><span id="VALopen_next_e"><span class="keyword">val</span> open_next_e</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">Netamqp_connection.connection</a> -><br>       <a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> Uq_engines.engine</code></pre><pre><span id="VALopen_next_s"><span class="keyword">val</span> open_next_s</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">Netamqp_connection.connection</a> -> <a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a></code></pre><div class="info">
+Opens a channel, and chooses the channel number automatically.<br>
+</div>
+<pre><span id="VALclose_e"><span class="keyword">val</span> close_e</span> : <code class="type"><a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -> unit Uq_engines.engine</code></pre><div class="info">
+Closes the channel. Raises <a href="Netamqp_channel.html#EXCEPTIONNot_open"><code class="code">Netamqp_channel.Not_open</code></a> if the
+      channel is not open.<br>
+</div>
+<pre><span id="VALclose_s"><span class="keyword">val</span> close_s</span> : <code class="type"><a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -> unit</code></pre><div class="info">
+Same as synchronous call<br>
+</div>
+<pre><span id="VALis_open"><span class="keyword">val</span> is_open</span> : <code class="type"><a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -> bool</code></pre><div class="info">
+Whether a channel is open. Note that the peer can close channels at
+      any time, so there is no guarantee that the channel is still open
+      when <code class="code">is_open</code> returns <code class="code">true</code>.
+<p>
+
+      Checking <code class="code">is_open</code> is mainly useful for recovery after exceptions.
+      Some exceptions close the channel, some do not.<br>
+</div>
+<pre><span id="VALconfigure_sync_timeout"><span class="keyword">val</span> configure_sync_timeout</span> : <code class="type"><a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -> float -> unit</code></pre><div class="info">
+Configure the timeout for synchronous request/response methods.
+      Defaults to 60 seconds. When timing out the channel is closed,
+      and all pending synchronous calls get the <a href="Netamqp_types.html#EXCEPTIONTimeout"><code class="code">Netamqp_types.Timeout</code></a>
+      exception.<br>
+</div>
+<pre><span id="VALsync_c2s_e"><span class="keyword">val</span> sync_c2s_e</span> : <code class="type">?no_wait:<a href="Netamqp_endpoint.html#TYPEsync_server_to_client_method_t">Netamqp_endpoint.sync_server_to_client_method_t</a> -><br>       <a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -><br>       <a href="Netamqp_endpoint.html#TYPEsync_client_initiated_method_t">Netamqp_endpoint.sync_client_initiated_method_t</a> -><br>       <a href="Netamqp_endpoint.html#TYPEdata">Netamqp_endpoint.data</a> option -><br>       (<a href="Netamqp_endpoint.html#TYPEsync_server_to_client_method_t">Netamqp_endpoint.sync_server_to_client_method_t</a> *<br>        <a href="Netamqp_endpoint.html#TYPEdata">Netamqp_endpoint.data</a> option)<br>       Uq_engines.engine</code></pre><pre><span id="VALsync_c2s_s"><span class="keyword">val</span> sync_c2s_s</span> : <code class="type">?no_wait:<a href="Netamqp_endpoint.html#TYPEsync_server_to_client_method_t">Netamqp_endpoint.sync_server_to_client_method_t</a> -><br>       <a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -><br>       <a href="Netamqp_endpoint.html#TYPEsync_client_initiated_method_t">Netamqp_endpoint.sync_client_initiated_method_t</a> -><br>       <a href="Netamqp_endpoint.html#TYPEdata">Netamqp_endpoint.data</a> option -><br>       <a href="Netamqp_endpoint.html#TYPEsync_server_to_client_method_t">Netamqp_endpoint.sync_server_to_client_method_t</a> *<br>       <a href="Netamqp_endpoint.html#TYPEdata">Netamqp_endpoint.data</a> option</code></pre><div class="info">
+Works very much like <a href="Netamqp_endpoint.html#VALsync_c2s_e"><code class="code">Netamqp_endpoint.sync_c2s_e</code></a>, but the <code class="code">channel_obj</code>
+      can be passed, and the right timeout handling is done for this channel.<br>
+</div>
+<pre><span id="VALnumber"><span class="keyword">val</span> number</span> : <code class="type"><a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -> <a href="Netamqp_channel.html#TYPEchannel">channel</a></code></pre><div class="info">
+Return the channel number<br>
+</div>
+<pre><span id="VALconnection"><span class="keyword">val</span> connection</span> : <code class="type"><a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -> <a href="Netamqp_connection.html#TYPEconnection">Netamqp_connection.connection</a></code></pre><div class="info">
+Return the connection the channel uses<br>
+</div>
+<pre><span id="VALendpoint"><span class="keyword">val</span> endpoint</span> : <code class="type"><a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -> <a href="Netamqp_endpoint.html#TYPEendpoint">Netamqp_endpoint.endpoint</a></code></pre><div class="info">
+Return the endpoint the channel uses<br>
+</div>
+<pre><span id="VALevent_system"><span class="keyword">val</span> event_system</span> : <code class="type"><a href="Netamqp_channel.html#TYPEchannel_obj">channel_obj</a> -> Unixqueue.event_system</code></pre><div class="info">
+Return the event system the channel uses<br>
+</div>
+</body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="Up" href="Netamqp_basic.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_basic.message</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a href="Netamqp_basic.html">Up</a>
+&nbsp;</div>
+<center><h1>Class type <a href="type_Netamqp_basic.message.html">Netamqp_basic.message</a></h1></center>
+<br>
+<pre><span id="TYPEmessage"><span class="keyword">class type</span> message</span> = <code class="code">object</code> <a href="Netamqp_basic.message-c.html">..</a> <code class="code">end</code></pre><hr width="100%">
+<pre><span id="METHODcontent_type"><span class="keyword">method</span> content_type</span> : <code class="type">string option</code></pre><div class="info">
+MIME typing<br>
+</div>
+<pre><span id="METHODcontent_encoding"><span class="keyword">method</span> content_encoding</span> : <code class="type">string option</code></pre><div class="info">
+MIME typing<br>
+</div>
+<pre><span id="METHODheaders"><span class="keyword">method</span> headers</span> : <code class="type"><a href="Netamqp_rtypes.html#TYPEtable">Netamqp_rtypes.table</a> option</code></pre><div class="info">
+For applications, and for header exchange routing<br>
+</div>
+<pre><span id="METHODdelivery_mode"><span class="keyword">method</span> delivery_mode</span> : <code class="type">int option</code></pre><div class="info">
+1=non-persistent, 2=persistent<br>
+</div>
+<pre><span id="METHODpriority"><span class="keyword">method</span> priority</span> : <code class="type">int option</code></pre><div class="info">
+message priority, 0 to 9<br>
+</div>
+<pre><span id="METHODcorrelation_id"><span class="keyword">method</span> correlation_id</span> : <code class="type">string option</code></pre><div class="info">
+For application use, no formal behaviour<br>
+</div>
+<pre><span id="METHODreply_to"><span class="keyword">method</span> reply_to</span> : <code class="type">string option</code></pre><div class="info">
+For application use, no formal behaviour but may hold the
+        name of a private response queue, when used in request messages<br>
+</div>
+<pre><span id="METHODexpiration"><span class="keyword">method</span> expiration</span> : <code class="type">string option</code></pre><div class="info">
+For implementation use, no formal behaviour<br>
+</div>
+<pre><span id="METHODmessage_id"><span class="keyword">method</span> message_id</span> : <code class="type">string option</code></pre><div class="info">
+For application use, no formal behaviour<br>
+</div>
+<pre><span id="METHODtimestamp"><span class="keyword">method</span> timestamp</span> : <code class="type">float option</code></pre><div class="info">
+For application use, no formal behaviour<br>
+</div>
+<pre><span id="METHODtyp"><span class="keyword">method</span> typ</span> : <code class="type">string option</code></pre><div class="info">
+For application use, no formal behaviour<br>
+</div>
+<pre><span id="METHODuser_id"><span class="keyword">method</span> user_id</span> : <code class="type">string option</code></pre><div class="info">
+For application use, no formal behaviour<br>
+</div>
+<pre><span id="METHODapp_id"><span class="keyword">method</span> app_id</span> : <code class="type">string option</code></pre><div class="info">
+For application use, no formal behaviour<br>
+</div>
+<pre><span id="METHODamqp_header"><span class="keyword">method</span> amqp_header</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEprops_t">Netamqp_endpoint.props_t</a></code></pre><div class="info">
+The complete message header (all of the above fields in once)<br>
+</div>
+<pre><span id="METHODamqp_body"><span class="keyword">method</span> amqp_body</span> : <code class="type">Xdr_mstring.mstring list</code></pre><div class="info">
+The message body<br>
+</div>
+</body></html>

@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Netamqp_queue.html">
+<link rel="next" href="Netamqp_tx.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_basic</title>
+</head>
+<body>
+<div class="navbar"><a href="Netamqp_queue.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Netamqp_tx.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Netamqp_basic.html">Netamqp_basic</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Netamqp_basic: <code class="code">sig</code> <a href="Netamqp_basic.html">..</a> <code class="code">end</code></pre>Sending and receiving messages via a queue<br>
+<hr width="100%">
+<pre><span id="TYPEmessage"><span class="keyword">class type</span> <a href="Netamqp_basic.message-c.html">message</a></span> = <code class="code">object</code> <a href="Netamqp_basic.message-c.html">..</a> <code class="code">end</code></pre><pre><span id="VALcreate_message"><span class="keyword">val</span> create_message</span> : <code class="type">?content_type:string -><br>       ?content_encoding:string -><br>       ?headers:<a href="Netamqp_rtypes.html#TYPEtable">Netamqp_rtypes.table</a> -><br>       ?delivery_mode:int -><br>       ?priority:int -><br>       ?correlation_id:string -><br>       ?reply_to:string -><br>       ?expiration:string -><br>       ?message_id:string -><br>       ?timestamp:float -><br>       ?typ:string -><br>       ?user_id:string -><br>       ?app_id:string -> Xdr_mstring.mstring list -> <a href="Netamqp_basic.message-c.html">message</a></code></pre><div class="info">
+Creates a new message. See the class type <a href="Netamqp_basic.message-c.html"><code class="code">Netamqp_basic.message</code></a>
+      for documentation of the optional header fields.
+<p>
+
+      The unnamed argument is the body.<br>
+</div>
+<pre><span id="VALqos_e"><span class="keyword">val</span> qos_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       ?prefetch_size:int -><br>       ?prefetch_count:int -> ?global:bool -> unit -> unit Uq_engines.engine</code></pre><pre><span id="VALqos_s"><span class="keyword">val</span> qos_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       ?prefetch_size:int -> ?prefetch_count:int -> ?global:bool -> unit -> unit</code></pre><div class="info">
+Sets the quality of service for the channel (or the whole connection
+      if <code class="code">global=true</code>).
+<p>
+<ul>
+<li><code class="code">prefetch_size</code>: Sets the prefetch window in octets</li>
+<li><code class="code">prefetch_count</code>: Sets the prefetch window in number of messages</li>
+</ul>
+<br>
+</div>
+<pre><span id="VALconsume_e"><span class="keyword">val</span> consume_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       queue:<a href="Netamqp_queue.html#TYPEqueue_name">Netamqp_queue.queue_name</a> -><br>       ?consumer_tag:string -><br>       ?no_local:bool -><br>       ?no_ack:bool -><br>       ?exclusive:bool -><br>       ?no_wait:bool -><br>       ?arguments:<a href="Netamqp_rtypes.html#TYPEtable">Netamqp_rtypes.table</a> -> unit -> string Uq_engines.engine</code></pre><pre><span id="VALconsume_s"><span class="keyword">val</span> consume_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       queue:<a href="Netamqp_queue.html#TYPEqueue_name">Netamqp_queue.queue_name</a> -><br>       ?consumer_tag:string -><br>       ?no_local:bool -><br>       ?no_ack:bool -><br>       ?exclusive:bool -><br>       ?no_wait:bool -> ?arguments:<a href="Netamqp_rtypes.html#TYPEtable">Netamqp_rtypes.table</a> -> unit -> string</code></pre><div class="info">
+This method asks the server to start a "consumer", which is a
+      transient request for messages from a specific
+      queue. Consumers last as long as the channel they were
+      declared on, or until the client cancels them.
+<p>
+
+      Arguments:<ul>
+<li><code class="code">queue</code>: The queue to consume from</li>
+<li><code class="code">consumer_tag</code>: Identifies the consumer. If empty or omitted,
+        the server creates a unique identifier</li>
+<li><code class="code">no_local</code>: Do not receive messages that were published over
+        this connection</li>
+<li><code class="code">no_ack</code>: Do not expect acknowledgements for consumed messages</li>
+<li><code class="code">exclusive</code>: Request exclusive access to the queue</li>
+<li><code class="code">no_wait</code>: whether not to wait for the response of the request.
+        This is faster, but errors are not immediately reported,
+        and automatically created consumer tags cannot be returned to
+        the client.</li>
+<li><code class="code">arguments</code>: Depends on the server implementation</li>
+</ul>
+
+      Return value: The actual consumer tag<br>
+</div>
+<pre><span id="VALcancel_e"><span class="keyword">val</span> cancel_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       consumer_tag:string -> ?no_wait:bool -> unit -> string Uq_engines.engine</code></pre><pre><span id="VALcancel_s"><span class="keyword">val</span> cancel_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       consumer_tag:string -> ?no_wait:bool -> unit -> string</code></pre><div class="info">
+Cancels the consumer identified by <code class="code">consumer_tag</code>. This does not
+     affect already delivered messages, but it does mean the server
+     will not send any more messages for that consumer. The client
+     may receive an arbitrary number of messages in between sending
+     the cancel method and receiving the cancel-ok reply. 
+<p>
+
+     Arguments:<ul>
+<li><code class="code">consumer_tag</code>: The consumer to cancel</li>
+<li><code class="code">no_wait</code>: whether not to wait for the response of the request.
+       This is faster, but errors are not immediately reported.</li>
+</ul>
+
+     Return value: The tag of the actually cancelled consumer<br>
+</div>
+<pre><span id="VALpublish_e"><span class="keyword">val</span> publish_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       exchange:<a href="Netamqp_exchange.html#TYPEexchange_name">Netamqp_exchange.exchange_name</a> -><br>       routing_key:string -><br>       ?mandatory:bool -><br>       ?immediate:bool -> <a href="Netamqp_basic.message-c.html">message</a> -> unit Uq_engines.engine</code></pre><pre><span id="VALpublish_s"><span class="keyword">val</span> publish_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       exchange:<a href="Netamqp_exchange.html#TYPEexchange_name">Netamqp_exchange.exchange_name</a> -><br>       routing_key:string -><br>       ?mandatory:bool -> ?immediate:bool -> <a href="Netamqp_basic.message-c.html">message</a> -> unit</code></pre><div class="info">
+Publishes the passed message. Note that this is an async operation,
+      and when this function is finished, this only means that the message
+      has been written to the socket, but not more.
+<p>
+
+      Arguments:<ul>
+<li><code class="code">exchange</code>: Name of exchange to send the message to</li>
+<li><code class="code">routing_key</code>: The routing key for the exchange</li>
+<li><code class="code">mandatory</code>: This flag tells the server how to react if the message
+        cannot be routed to a queue. If this flag is set, the server will
+        return an unroutable message with a Return method. If this flag is
+        false, the server silently drops the message.</li>
+<li><code class="code">immediate</code>: This flag tells the server how to react if the message cannot be
+        routed to a queue consumer immediately. If this flag is set, the
+        server will return an undeliverable message with a Return method. 
+        If this flag is false, the server will queue the message, but with 
+        no guarantee that it will ever be consumed.</li>
+</ul>
+<br>
+</div>
+<pre><span id="VALon_return"><span class="keyword">val</span> on_return</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       cb:(reply_code:int -><br>           reply_text:string -><br>           exchange:<a href="Netamqp_exchange.html#TYPEexchange_name">Netamqp_exchange.exchange_name</a> -><br>           routing_key:string -> <a href="Netamqp_basic.message-c.html">message</a> -> unit) -><br>       unit -> unit</code></pre><div class="info">
+Registers a handler so that <code class="code">cb</code> is called back whenever a
+      message is returned to the client. The handler remains active
+      as long as the channel is open.
+<p>
+
+      Arguments of the callback:<ul>
+<li><code class="code">reply_code</code>: Reason for return, as error code</li>
+<li><code class="code">reply_text</code>: Reason for return, as error text</li>
+<li><code class="code">exchange</code>: the exchange the message was originally published
+         to.  May be empty, meaning the default exchange.</li>
+<li><code class="code">routing_key</code>: the routing key name specified when the message was
+         published</li>
+</ul>
+<br>
+</div>
+<pre><span id="VALon_deliver"><span class="keyword">val</span> on_deliver</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       cb:(consumer_tag:string -><br>           delivery_tag:Rtypes.uint8 -><br>           redelivered:bool -><br>           exchange:<a href="Netamqp_exchange.html#TYPEexchange_name">Netamqp_exchange.exchange_name</a> -><br>           routing_key:string -> <a href="Netamqp_basic.message-c.html">message</a> -> unit) -><br>       unit -> unit</code></pre><div class="info">
+Registers a handler so that <code class="code">cb</code> is called back whenever a
+      message is delivered to the client. The handler remains active
+      as long as the channel is open.
+<p>
+
+      Arguments of the callback:<ul>
+<li><code class="code">consumer_tag</code>: The name of the consumer to which this delivery
+        refers to</li>
+<li><code class="code">delivery_tag</code>: A unique name of this delivery. Needed for
+        acknowledging the message</li>
+<li><code class="code">redelivered</code>: indicates that the message has been previously
+        delivered to this or another client</li>
+<li><code class="code">exchange</code>: the exchange the message was originally published
+        to. May be empty, meaning the default exchange.</li>
+<li><code class="code">routing_key</code>: the routing key name specified when the message was
+        published</li>
+</ul>
+<br>
+</div>
+<pre><span id="TYPEget_message"><span class="keyword">type</span> <code class="type">'a</code> get_message</span> = <code class="type">out:(delivery_tag:Rtypes.uint8 -><br>            redelivered:bool -><br>            exchange:<a href="Netamqp_exchange.html#TYPEexchange_name">Netamqp_exchange.exchange_name</a> -><br>            routing_key:string -><br>            message_count:Rtypes.uint4 -> <a href="Netamqp_basic.message-c.html">message</a> -> 'a) -><br>       unit -> 'a</code> </pre>
+<div class="info">
+The result of <code class="code">get</code> is returned by providing this function to the caller.
+      When this function is called with an <code class="code">out</code> argument, it will immediately
+      call <code class="code">out</code> back with the result values. The return value of <code class="code">cb</code> is
+      the return value of <code class="code">get_message</code>.
+<p>
+
+      Arguments of <code class="code">out</code>:<ul>
+<li><code class="code">delivery_tag</code>: A unique name of this delivery. Needed for
+        acknowledging the message</li>
+<li><code class="code">redelivered</code>: indicates that the message has been previously
+        delivered to this or another client</li>
+<li><code class="code">exchange</code>: the exchange the message was originally published
+        to. May be empty, meaning the default exchange.</li>
+<li><code class="code">routing_key</code>: the routing key name specified when the message was
+        published</li>
+<li><code class="code">message_count</code>: ?</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="TYPEget_result"><span class="keyword">type</span> <code class="type">'a</code> get_result</span> = <code class="type">[ `Empty | `Message of 'a <a href="Netamqp_basic.html#TYPEget_message">get_message</a> ]</code> </pre>
+<div class="info">
+Responses of <code class="code">get</code> can return a message, or indicate that the queue
+      is empty<br>
+</div>
+
+<pre><span id="VALget_e"><span class="keyword">val</span> get_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       queue:<a href="Netamqp_queue.html#TYPEqueue_name">Netamqp_queue.queue_name</a> -><br>       ?no_ack:bool -> unit -> 'a <a href="Netamqp_basic.html#TYPEget_result">get_result</a> Uq_engines.engine</code></pre><pre><span id="VALget_s"><span class="keyword">val</span> get_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       queue:<a href="Netamqp_queue.html#TYPEqueue_name">Netamqp_queue.queue_name</a> -><br>       ?no_ack:bool -> unit -> 'a <a href="Netamqp_basic.html#TYPEget_result">get_result</a></code></pre><div class="info">
+Fetches a message synchronously from the queue.
+<p>
+
+      Arguments:<ul>
+<li><code class="code">queue</code>: the name of the queue</li>
+<li><code class="code">no_ack</code>: Do not expect acknowledgements for consumed messages</li>
+</ul>
+
+      The result is made available via a function <code class="code">get_result</code>. For
+      example, to just get the message:
+<p>
+
+      <pre><code class="code">        let get_result = get_s ... () in
+        match get_result with
+          | `Empty -&gt; failwith "No message on the queue"
+          | `Message get_msg -&gt;
+              let message =
+		  get_msg 
+		    ~out:(fun ~delivery_tag ~redelivered ~exchange ~routing_key
+			      ~message_count message -&gt;
+			    message
+			 )
+		    () in
+                 ...
+      </code></pre><br>
+</div>
+<pre><span id="VALack_e"><span class="keyword">val</span> ack_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       delivery_tag:Rtypes.uint8 -> ?multiple:bool -> unit -> unit Uq_engines.engine</code></pre><pre><span id="VALack_s"><span class="keyword">val</span> ack_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       delivery_tag:Rtypes.uint8 -> ?multiple:bool -> unit -> unit</code></pre><div class="info">
+Acknowledges the delivery of the message identified by <code class="code">delivery_tag</code>.
+      Note that this is an async operation,
+      and when this function is finished, this only means that the request
+      has been written to the socket, but not more.
+<p>
+
+      Arguments:<ul>
+<li><code class="code">multiple</code>: If set, the delivery tag is treated as "up to and
+        including", so that the client can acknowledge multiple messages 
+        with a single method.</li>
+</ul>
+<br>
+</div>
+<pre><span id="VALreject_e"><span class="keyword">val</span> reject_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       delivery_tag:Rtypes.uint8 -> requeue:bool -> unit -> unit Uq_engines.engine</code></pre><pre><span id="VALreject_s"><span class="keyword">val</span> reject_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       delivery_tag:Rtypes.uint8 -> requeue:bool -> unit -> unit</code></pre><div class="info">
+Rejects a message (instead of acknowledging it).
+      Note that this is an async operation,
+      and when this function is finished, this only means that the request
+      has been written to the socket, but not more.
+<p>
+
+      Arguments:<ul>
+<li><code class="code">delivery_tag</code>: identifies the message to reject</li>
+<li><code class="code">requeue</code>: Requeue the message. The message is never sent again to
+        this channel.</li>
+</ul>
+<br>
+</div>
+<pre><span id="VALrecover_e"><span class="keyword">val</span> recover_e</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -><br>       requeue:bool -> unit -> unit Uq_engines.engine</code></pre><pre><span id="VALrecover_s"><span class="keyword">val</span> recover_s</span> : <code class="type">channel:<a href="Netamqp_channel.html#TYPEchannel_obj">Netamqp_channel.channel_obj</a> -> requeue:bool -> unit -> unit</code></pre><div class="info">
+Redeliver all unacknowledged messages on a
+      specified channel. Zero or more messages may be redelivered.
+<p>
+
+      Arguments:<ul>
+<li><code class="code">requeue</code>: If this field is false, the message will be redelivered
+        to the original recipient. If this bit is set, the server will attempt
+        to requeue the message,
+        potentially then delivering it to an alternative subscriber.</li>
+</ul>
+<br>
+</div>
+<br>
+recover-async is deprecated and omitted here<br>
+</body></html>

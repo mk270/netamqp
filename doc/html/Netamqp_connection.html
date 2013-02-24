@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Netamqp_endpoint.html">
+<link rel="next" href="Netamqp_channel.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of class methods" rel=Appendix href="index_methods.html">
+<link title="Index of class types" rel=Appendix href="index_class_types.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Netamqp_rtypes" rel="Chapter" href="Netamqp_rtypes.html">
+<link title="Netamqp_types" rel="Chapter" href="Netamqp_types.html">
+<link title="Netamqp_transport" rel="Chapter" href="Netamqp_transport.html">
+<link title="Netamqp_methods_0_9" rel="Chapter" href="Netamqp_methods_0_9.html">
+<link title="Netamqp_endpoint" rel="Chapter" href="Netamqp_endpoint.html">
+<link title="Netamqp_connection" rel="Chapter" href="Netamqp_connection.html">
+<link title="Netamqp_channel" rel="Chapter" href="Netamqp_channel.html">
+<link title="Netamqp_exchange" rel="Chapter" href="Netamqp_exchange.html">
+<link title="Netamqp_queue" rel="Chapter" href="Netamqp_queue.html">
+<link title="Netamqp_basic" rel="Chapter" href="Netamqp_basic.html">
+<link title="Netamqp_tx" rel="Chapter" href="Netamqp_tx.html"><title>Netamqp - AMQP client : Netamqp_connection</title>
+</head>
+<body>
+<div class="navbar"><a href="Netamqp_endpoint.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Netamqp_channel.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Netamqp_connection.html">Netamqp_connection</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Netamqp_connection: <code class="code">sig</code> <a href="Netamqp_connection.html">..</a> <code class="code">end</code></pre>Manage AMQP connections<br>
+<hr width="100%">
+<br>
+A connection on the AMQP level is a managed version of the transport
+    stream (i.e. the TCP connection). There is a handshake at
+    connection establishment time where protocol details are negotiated
+    and the client is authenticated.
+<p>
+
+    There is another handshake at connection close time where one peer
+    initiates the closure and the other peer has to approve. Either
+    peer can initiate closure. It is possible to transmit error codes
+    at connection close time.
+<p>
+
+    The transport stream is automatically closed when the close handshake
+    has finished.
+<p>
+
+    In this implementation, connection management is separated from
+    endpoint management. The latter is done in <a href="Netamqp_endpoint.html"><code class="code">Netamqp_endpoint</code></a>,
+    and describes the AMQP client on a lower level.<br>
+<pre><span id="EXCEPTIONNot_open"><span class="keyword">exception</span> Not_open</span></pre>
+<div class="info">
+Raised if the connection is not known to be open on the client side<br>
+</div>
+<pre><span id="EXCEPTIONError"><span class="keyword">exception</span> Error</span> <span class="keyword">of</span> <code class="type">string</code></pre>
+<div class="info">
+An error occurred in connection management<br>
+</div>
+<pre><span id="TYPEconnection"><span class="keyword">type</span> <code class="type"></code>connection</span> </pre>
+<div class="info">
+The connection management object<br>
+</div>
+
+<pre><span id="TYPEauth_method"><span class="keyword">type</span> <code class="type"></code>auth_method</span> </pre>
+<div class="info">
+An authentication method, including client identity and credentials<br>
+</div>
+
+<pre><span id="TYPElocale_preference"><span class="keyword">type</span> <code class="type"></code>locale_preference</span> = <code class="type">[ `Pref of string | `Select of string list -> string ]</code> </pre>
+<div class="info">
+One can select the locale for error messages coming from the server:<ul>
+<li><code class="code">`Pref p</code>: Prefer the locale <code class="code">p</code> if possible, otherwise choose the
+        first locale offered by the server</li>
+<li><code class="code">`Select f</code>: Call the function <code class="code">f</code> with all possibilities to select
+        the locale.</li>
+</ul>
+
+      Locales are identified as in Unix, e.g. "en_US".<br>
+</div>
+
+<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type"><a href="Netamqp_endpoint.html#TYPEendpoint">Netamqp_endpoint.endpoint</a> -> <a href="Netamqp_connection.html#TYPEconnection">connection</a></code></pre><div class="info">
+Create the connection management object for the endpoint. The endpoint
+      should be in <code class="code">`Off</code> state. The returned connection object is 
+      still closed, and may now be opened.<br>
+</div>
+<pre><span id="VALopen_e"><span class="keyword">val</span> open_e</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">connection</a> -><br>       <a href="Netamqp_connection.html#TYPEauth_method">auth_method</a> list -><br>       <a href="Netamqp_connection.html#TYPElocale_preference">locale_preference</a> -> string -> unit Uq_engines.engine</code></pre><div class="info">
+Opens a connection: The endpoint is instructed to connect on the
+      transport level, to negotiate protocol parameters, and to
+      authenticate the client.
+<p>
+
+      The string argument is the virtual host of the AMQP server to
+      connect to, e.g. "/".<br>
+</div>
+<pre><span id="VALopen_s"><span class="keyword">val</span> open_s</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">connection</a> -><br>       <a href="Netamqp_connection.html#TYPEauth_method">auth_method</a> list -><br>       <a href="Netamqp_connection.html#TYPElocale_preference">locale_preference</a> -> string -> unit</code></pre><div class="info">
+Same as synchronous function<br>
+</div>
+<pre><span id="VALclose_e"><span class="keyword">val</span> close_e</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">connection</a> -> unit Uq_engines.engine</code></pre><pre><span id="VALclose_s"><span class="keyword">val</span> close_s</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">connection</a> -> unit</code></pre><div class="info">
+Request client side closure.<br>
+</div>
+<pre><span id="VALis_open"><span class="keyword">val</span> is_open</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">connection</a> -> bool</code></pre><div class="info">
+The connection is first open after the open handshake has been
+      completed, i.e. when <code class="code">open_e</code> or <code class="code">open_s</code> are done.
+<p>
+
+      Note that the peer can close channels at
+      any time, so there is no guarantee that the channel is still open
+      when <code class="code">is_open</code> returns <code class="code">true</code>.
+<p>
+
+      Checking <code class="code">is_open</code> is mainly useful for recovery after exceptions.
+      Some exceptions close the channel, some do not.<br>
+</div>
+<pre><span id="VALplain_auth"><span class="keyword">val</span> plain_auth</span> : <code class="type">string -> string -> <a href="Netamqp_connection.html#TYPEauth_method">auth_method</a></code></pre><div class="info">
+<code class="code">plain_auth username password</code>: use <code class="code">PLAIN</code> authentication.
+<p>
+
+      Note that username and password are not encrypted on the wire!<br>
+</div>
+<pre><span id="VALendpoint"><span class="keyword">val</span> endpoint</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">connection</a> -> <a href="Netamqp_endpoint.html#TYPEendpoint">Netamqp_endpoint.endpoint</a></code></pre><div class="info">
+Return the endpoint the connection uses<br>
+</div>
+<pre><span id="VALevent_system"><span class="keyword">val</span> event_system</span> : <code class="type"><a href="Netamqp_connection.html#TYPEconnection">connection</a> -> Unixqueue.event_system</code></pre><div class="info">
+Return the event system the connection uses<br>
+</div>
+</body></html>
