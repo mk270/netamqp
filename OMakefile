@@ -23,7 +23,7 @@ FILES[] =
    netamqp_basic
    netamqp_tx
 
-OCAMLPACKS += rpc
+OCAMLPACKS += rpc pcre
 
 LocalOCamlGeneratedFiles($(GEN))
 
