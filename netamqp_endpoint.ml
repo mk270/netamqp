@@ -590,7 +590,7 @@ let handle_frame_0_9 ep frame =
 	     | `Proto_header -> "proto_header"
 	 )
 	 frame.frame_channel
-	 (Rpc_util.hex_dump_s s 0 (String.length s) ^ 
+	 (Netamqp_rpc_util.hex_dump_s s 0 (String.length s) ^ 
 	    if n > String.length s then "..." else "")
     );
   let msg = Netamqp_methods_0_9.decode_message frame in

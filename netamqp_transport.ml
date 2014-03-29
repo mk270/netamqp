@@ -161,7 +161,7 @@ object(self)
 	  ~when_done:(fun exn_opt n ->
 			dlogr (fun () ->
 				 sprintf "Reading [mem]: %s%s"
-				   (Rpc_util.hex_dump_m b start (min n 200))
+				   (Netamqp_rpc_util.hex_dump_m b start (min n 200))
 				   (if n > 200 then "..." else "")
 			      );
 			Netpagebuffer.advance rd_buffer n;
@@ -176,7 +176,7 @@ object(self)
 	  ~when_done:(fun exn_opt n ->
 			dlogr (fun () ->
 				 sprintf "Reading [str]: %s%s"
-				   (Rpc_util.hex_dump_s 
+				   (Netamqp_rpc_util.hex_dump_s 
 				      rd_buffer_nomem 0 (min n 200))
 				   (if n > 200 then "..." else "")
 			      );
@@ -393,7 +393,7 @@ object(self)
 	  | `Memory(m,p,l,_,_) ->
 	      dlogr (fun () ->
 		       sprintf "Writing [mem]: %s%s" 
-			 (Rpc_util.hex_dump_m m p (min l 200))
+			 (Netamqp_rpc_util.hex_dump_m m p (min l 200))
 			 (if l > 200 then "..." else "")
 		    );
 	      mplex # start_mem_writing
@@ -401,7 +401,7 @@ object(self)
 	  | `String(s,p,l) ->
 	      dlogr (fun () ->
 		       sprintf "Writing [str]: %s%s" 
-			 (Rpc_util.hex_dump_s s p (min l 200))
+			 (Netamqp_rpc_util.hex_dump_s s p (min l 200))
 			 (if l > 200 then "..." else "")
 		    );
 	      mplex # start_writing

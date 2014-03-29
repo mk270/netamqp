@@ -11,6 +11,7 @@ GEN[] =
    netamqp_methods_0_9.mli
 
 FILES[] =
+   netamqp_rpc_util
    netamqp_rtypes
    netamqp_types
    netamqp_transport
@@ -23,7 +24,7 @@ FILES[] =
    netamqp_basic
    netamqp_tx
 
-OCAMLPACKS += rpc pcre
+OCAMLPACKS += rpclib netsys netstring equeue pcre
 
 LocalOCamlGeneratedFiles($(GEN))
 
