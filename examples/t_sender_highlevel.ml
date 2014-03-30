@@ -9,7 +9,6 @@
 
 open Netamqp_types
 open Printf
-open Globals
 
 let () =
   Netamqp_endpoint.Debug.enable := true;
@@ -17,7 +16,7 @@ let () =
 
 
 let esys = Unixqueue.create_unix_event_system()
-let p = `TCP(`Inet(Globals.host, Netamqp_endpoint.default_port))
+let p = `TCP(`Inet(Unix.gethostname(), Netamqp_endpoint.default_port))
 let ep = Netamqp_endpoint.create p (`AMQP_0_9 `One) esys
 let c = Netamqp_connection.create ep
 let auth = Netamqp_connection.plain_auth "guest" "guest"
@@ -84,8 +83,8 @@ let sender file_name =
     *)
       Netamqp_basic.publish_s
 	~channel:co
-	~exchange:Globals.exchange
-	~routing_key:Globals.routing_key
+	~exchange:Netamqp_exchange.amq_direct
+	~routing_key:"default_routing_key"
 	msg;
 
     (* Now do the Tx-commit: *)

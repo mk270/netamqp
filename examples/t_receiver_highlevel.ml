@@ -35,7 +35,7 @@ let auth = Netamqp_connection.plain_auth "guest" "guest"
 let channel = 1
 
 (* The name of the queue: *)
-let qname = "test_xy"
+let qname = "default"
 
 (* The routing key says how the queue can be reached (the address): *)
 let routing_key = qname ^ "_routing_key"

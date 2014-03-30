@@ -1,5 +1,5 @@
 description = "Messaging client for AMQP"
 version = "0"
-requires = "rpclib, pcre"
+requires = "rpclib, pcre, equeue"
 archive(byte) = "netamqp.cma"
 archive(native) = "netamqp.cmxa"
